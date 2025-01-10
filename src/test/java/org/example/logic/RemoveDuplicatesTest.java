@@ -1,35 +1,43 @@
 package org.example.logic;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RemoveDuplicatesTest{
     
+    private static RemoveDuplicates removeDuplicates;
+    
+    @BeforeAll
+    static void setUp(){
+        removeDuplicates = new RemoveDuplicates();
+    }
+    
     @Test
     void testEmptyString(){
-        assertEquals("", RemoveDuplicates.textWithoutDuplicates(""));
+        assertEquals("", removeDuplicates.textWithoutDuplicates(""));
     }
     
     @Test
     void testUniqueCharacters(){
-        assertEquals("ABC", RemoveDuplicates.textWithoutDuplicates("ABC"));
+        assertEquals("ABC", removeDuplicates.textWithoutDuplicates("ABC"));
     }
     
     @Test
     void testDuplicateCharacters(){
-        assertEquals("ABC123", RemoveDuplicates.textWithoutDuplicates("AABBCC112233"));
+        assertEquals("ABC123", removeDuplicates.textWithoutDuplicates("AABBCC112233"));
     }
     
     @Test
     void testOneCharacter(){
-        assertEquals("A", RemoveDuplicates.textWithoutDuplicates("AAAAA"));
+        assertEquals("A", removeDuplicates.textWithoutDuplicates("AAAAA"));
     }
     
     @Test
     void testNullString(){
         Exception exception = assertThrows(IllegalArgumentException.class, () ->{
-           RemoveDuplicates.textWithoutDuplicates(null); 
+            removeDuplicates.textWithoutDuplicates(null); 
         });
         assertEquals("Text cannot be null", exception.getMessage());
     }
@@ -40,7 +48,7 @@ public class RemoveDuplicatesTest{
         String expected = "A";
         
         long startTime = System.currentTimeMillis();
-        String result = RemoveDuplicates.textWithoutDuplicates(longText);
+        String result = removeDuplicates.textWithoutDuplicates(longText);
         long endTime = System.currentTimeMillis();
         
         assertEquals(expected, result);
